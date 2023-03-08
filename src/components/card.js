@@ -1,4 +1,31 @@
+import axios from 'axios';
+
 const Card = (article) => {
+  const cardDiv = document.createElement('div');
+  const headlineDiv = document.createElement('div');
+  const authorDiv = document.createElement('div');
+  const imgContainer = document.createElement('div');
+  const img = document.createElement('img');
+  const authorSpan = document.createElement('span');
+
+  cardDiv.classList.add('card');
+  headlineDiv.classList.add('headline');
+  authorDiv.classList.add('author');
+  imgContainer.classList.add('img-container');
+
+  headlineDiv.textContent = article.headline;
+  img.src = article.authorPhoto;
+  authorSpan.textContent = `By ${article.authorName}`;
+
+  cardDiv.appendChild(headlineDiv)
+  cardDiv.appendChild(authorDiv)
+  authorDiv.appendChild(imgContainer)
+  authorDiv.appendChild(authorSpan)
+  imgContainer.appendChild(img)
+
+  return cardDiv;
+
+
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -20,6 +47,12 @@ const Card = (article) => {
 }
 
 const cardAppender = (selector) => {
+
+  axios.get('http://localhost:5001/api/articles')
+  .then(res => {
+    console.log(res)
+    
+  })
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.
